@@ -8,8 +8,8 @@ import { IPost } from '../model/ipost';
 export class EchoService {
 	constructor(private httpClient: HttpClient) {}
 
-	public getPosts(from: number, limit: number): Observable<IPost[]> {
-		return this.httpClient.get<IPost[]>('https://jsonplaceholder.typicode.com/posts').map(posts => posts.slice(from, from + limit));
+	public getPosts(): Observable<IPost[]> {
+		return this.httpClient.get<IPost[]>('https://jsonplaceholder.typicode.com/posts');
 	}
 
     public getPost(id: number): Observable<IPost> {
