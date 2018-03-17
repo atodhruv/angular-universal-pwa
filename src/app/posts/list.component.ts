@@ -1,6 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { EchoService } from '../services/echo.service';
-import { Observable } from 'rxjs/Observable';
+import { Component, OnInit } from '@angular/core';
 import { IPost } from '../model/ipost';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -11,15 +9,15 @@ import { ActivatedRoute, Router } from '@angular/router';
     `]
 })
 export class ListComponent implements OnInit {
-   public posts: Observable<IPost[]>;
+    public posts: IPost[];
    public page: number;
 
-   constructor(private echoService: EchoService, private activatedRoute: ActivatedRoute, private router: Router) {}
+   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
    public ngOnInit(): void {
        this.activatedRoute.queryParams.subscribe(params => {
            this.page = +params['page'] || 0;
-           this.posts = this.echoService.getPosts(this.page * 10 + 1, 10);
+           this.posts = this.activatedRoute.snapshot.data.posts.filter(post => post.id > this.page * 10 && post.id < this.page * 10 + 11);
        });
    }
 
@@ -31,4 +29,3 @@ export class ListComponent implements OnInit {
        this.router.navigate(['posts'], {queryParams: {page: this.page - 1}});
    }
 }
-

@@ -2,9 +2,9 @@
 <a (click)="previousPage()" *ngIf="page > 0">previous</a>
 <a (click)="nextPage()" *ngIf="page < 9">next</a>
 <ul>
-	<li *ngFor="let post of posts | async">
+	<li *ngFor="let post of posts">
 		<a [routerLink]="['/posts', post.id]">
-			{{post.title}}
+			{{post.id}} - {{post.title}}
 		</a>
 	</li>
 </ul>
