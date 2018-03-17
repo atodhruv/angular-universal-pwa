@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     `]
 })
 export class ListComponent implements OnInit {
-    public posts: IPost;
+    public posts: IPost[];
    public page: number;
 
    constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
